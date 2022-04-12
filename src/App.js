@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Kekambas from './components/Kekambas'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
-export default App;
+export default class App extends Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			data: []
+		}
+	};
+    
+	componentDidMount(){
+		console.log('App Mounted')
+		fetch(`https://kekambas-bs.herokuapp.com/kekambas`)
+			.then(res => res.json())
+			.then(data => {
+				console.log(data)
+				this.setState({data})
+			})
+	}
+
+	render(){
+		return (
+			<>
+				
+				<Kekambas classmates={this.state.data}/>
+
+			</>
+
+		)
+	}
+
+};
