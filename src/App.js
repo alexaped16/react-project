@@ -1,34 +1,32 @@
-import React, { Component } from 'react';
-import Kekambas from './components/Kekambas'
+import React from 'react'
+import Nav from "./components/Nav";
+import KekambasCrew from "./views/KekambasCrew";
+import Home from "./views/Home";
+import Posts from "./views/Posts";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+function App() {
+    return (
+        <Router>
+          <Nav />
+            <div className='App'>
+                <Routes>
+                    <Route path="/" element={<Home/>} />
+                    <Route path="/posts" element={<Posts/>} />
+                    <Route path="/kekambascrew" element={<KekambasCrew/>} />
+                </Routes>
+              </div>
+        </Router>
+
+    );
+}
+
+export default App; 
 
 
-export default class App extends Component{
-	constructor(props){
-		super(props);
-		this.state = {
-			data: []
-		}
-	};
-    
-	componentDidMount(){
-		console.log('App Mounted')
-		fetch(`https://kekambas-bs.herokuapp.com/kekambas`)
-			.then(res => res.json())
-			.then(data => {
-				console.log(data)
-				this.setState({data})
-			})
-	}
 
-	render(){
-		return (
-			<>
-				
-				<Kekambas classmates={this.state.data}/>
 
-			</>
 
-		)
-	}
 
-};
+
+
